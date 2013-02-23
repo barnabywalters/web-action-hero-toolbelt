@@ -1,0 +1,16 @@
+{
+  "content_scripts": [], 
+  "description": "Extension description", 
+  "creator": "KangoExtensions", 
+  "background_scripts": [
+    "main.js"
+  ], 
+  "homepage_url": "http://kangoextensions.com/", 
+  "version": "0.9", 
+  "browser_button": {
+    "caption": "Kango", 
+    "icon": "icons/button.png", 
+    "tooltipText": "Kango"
+  }, 
+  "name": "Web Actions"
+}

@@ -1,0 +1,3 @@
+content kango chrome/content/
+overlay chrome://browser/content/browser.xul chrome://kango/content/content.xul
+resource kango chrome/content/

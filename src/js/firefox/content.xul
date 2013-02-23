@@ -1,0 +1,58 @@
+﻿<?xml version="1.0"?>
+<overlay xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" xmlns:html="http://www.w3.org/1999/xhtml">
+	<!-- Kango -->
+	<script src="kango/kango.js" type="text/javascript"></script>
+	<script src="kango/lang.js" type="text/javascript"></script>
+	<script src="kango/console.js" type="text/javascript"></script>
+	<script src="kango/xhr.js" type="text/javascript"></script>
+	<script src="kango/browser.js" type="text/javascript"></script>
+	<script src="kango/io.js" type="text/javascript"></script>
+    <script src="kango/storage.js" type="text/javascript"></script>
+    <script src="kango/jsonstorage.js" type="text/javascript"></script>
+	<script src="kango/messaging.js" type="text/javascript"></script>
+	<script src="kango/i18n.js" type="text/javascript"></script>
+	<script src="kango/uninstall_observer.js" type="text/javascript"></script>
+	<script src="kango/userscript_engine.js" type="text/javascript"></script>
+	<script src="kango/userscript_client.js" type="text/javascript"></script>
+	<script src="kango/invoke_async_module.js" type="text/javascript"></script>
+	<script src="kango/message_target_module.js" type="text/javascript"></script>
+    <script src="kango/backgroundscript_engine.js" type="text/javascript"></script>
+	
+	<!-- Kango UI -->
+	<script src="kango-ui/ui.js" type="text/javascript"></script>
+	<script src="kango-ui/browser_button.js" type="text/javascript"></script>
+	<script src="kango-ui/toolbar.js" type="text/javascript"></script>
+	<script src="kango-ui/popup.js" type="text/javascript"></script>
+    <script src="kango-ui/options.js" type="text/javascript"></script>
+    <script src="kango-ui/notifications.js" type="text/javascript"></script>
+    <script src="kango-ui/context_menu.js" type="text/javascript"></script>
+	
+	<!-- UI_BROWSER_BUTTON_START -->
+	<toolbarpalette id="BrowserToolbarPalette">
+		<toolbaritem id="kango-ui-browserButton-container" align="center">
+			<toolbarbutton id="kango-ui-browserButton"/>
+		</toolbaritem>
+	</toolbarpalette>
+	<toolbarbutton class="chromeclass-toolbar-additional toolbarbutton-1" id="kango-ui-browserButton" label="" tooltiptext="" image="chrome://kango/content/icons/button.png"/>
+	<!-- UI_BROWSER_BUTTON_END -->
+
+	<!-- UI_TOOLBAR_START -->
+	<toolbox id="navigator-toolbox">
+		<toolbar id="kango-ui-toolbar" toolbarname="Kango" class="chromeclass-toolbar" context="toolbar-context-menu" hidden="false" persist="hidden" customizable="true" collapsed="false">
+				<spacer id="kango-ui-toolbar-spacer" width="2"/>
+				<toolbaritem id="kango-ui-toolbar-container" removable="true"></toolbaritem>
+		</toolbar>
+	</toolbox>
+	<!-- UI_TOOLBAR_END -->
+
+    <box style="display:none;">
+		<html:canvas id="kango-ui-canvas" width="19" height="19"/>
+        <iframe id="kango-background-script-host" type="content" hidden="false" height="0"/>
+	</box>
+
+    <!-- MODULES_PLACEHOLDER -->
+	
+	<!-- Kango Init -->
+	<script src="kango/initialize.js" type="text/javascript"></script>
+	
+</overlay>

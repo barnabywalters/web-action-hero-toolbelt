@@ -1,0 +1,32 @@
+﻿<?xml version="1.0"?>
+<?xml-stylesheet type="text/css" href="chrome://global/skin/" ?>
+<?xml-stylesheet type="text/css" href="chrome://browser/skin/browser.css" ?>
+<?xml-stylesheet type="text/css" href="theme/bubble/style.css" ?>
+
+<window id="Kango-Popup" title="Kango-Popup" hidechrome="true" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	
+	<stack flex="1">
+		<vbox flex="1">
+			<hbox>
+				<box class="corner top-left"></box>
+				<box class="top-middle" flex="1"></box>
+				<box class="corner top-right"></box>
+			</hbox>
+			<hbox flex="1">
+				<box class="middle-left horiz-border"></box>
+				<vbox id="frame_box" flex="1">
+					<browser id="frame" flex="1" type="content" style="overflow: auto;"/>
+				</vbox>	
+				<box class="middle-right horiz-border"></box>
+			</hbox>
+			<hbox>
+				<box class="corner bottom-left"></box>
+				<box class="bottom-middle" flex="1"></box>
+				<box class="corner bottom-right"></box>
+			</hbox>
+		</vbox>	
+		<box id="pin" style="display:none;"></box>
+	</stack>
+
+	<script type="application/javascript" src="popup_window.js"></script>
+</window>

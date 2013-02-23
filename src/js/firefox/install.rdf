@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+    <Description about="urn:mozilla:install-manifest">
+        <em:id>{B3834E60-12A8-11E0-A289-939FDFD72085}</em:id>
+        <em:name>Name</em:name>
+        <em:version>1.0.0</em:version>
+        <em:targetApplication>
+            <Description>
+                <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
+                <em:minVersion>4.0</em:minVersion>
+                <em:maxVersion>18.*</em:maxVersion>
+            </Description>
+        </em:targetApplication>
+		<em:description>Description</em:description>
+        <em:creator>Creator</em:creator>
+		<em:homepageURL>http://example.com/</em:homepageURL>
+		<em:updateURL>http://example.com/</em:updateURL>
+		<em:iconURL>chrome://kango/content/icons/icon32.png</em:iconURL>
+		<em:optionsURL>chrome://kango/content/options.html</em:optionsURL>
+		<em:optionsType>3</em:optionsType>
+    </Description>
+</RDF>

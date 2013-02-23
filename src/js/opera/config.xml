@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<widget xmlns="http://www.w3.org/ns/widgets" version="__ext_ver__" id="__ext_id__">
+	<name>__ext_name__</name>
+	<description>__ext_descr__</description>
+	<author href="__auth_href__">__auth_name__</author>
+	<update-description href=""/>
+	<icon src="icons/icon100.png"/>
+	<content src="background.html"/>
+	<access origin="*"/>
+	<feature name="opera:share-cookies"/>
+    <feature name="opera:contextmenus"/>
+</widget>

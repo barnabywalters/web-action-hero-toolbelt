@@ -1,0 +1,1 @@
+window.addEventListener("DOMContentLoaded",function(){"undefined"!=typeof safari.extension.globalPage?(window.kango=KangoAPI.createKangoProxy(safari.extension.globalPage.contentWindow.kango),KangoAPI.closeWindow=function(){kango.ui.browserButton.closePopup()}):(window.kango._initMessaging(),KangoAPI.closeWindow=function(){window.close()});KangoAPI.fireReady()},!1);

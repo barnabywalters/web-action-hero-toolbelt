@@ -1,0 +1,1 @@
+kango.addEventListener(kango.event.READY,function(){kango.browser.addEventListener("DOMContentLoaded",function(a){var b=new kango.UserscriptEngineClient,c=a.window==a.window.top;b.run(a.window,"document-start",c);b.run(a.window,"document-end",c)})});
