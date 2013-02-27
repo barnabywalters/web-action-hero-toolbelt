@@ -1,17 +1,19 @@
 {
+  "kango_version": "1.0.1 final", 
   "content_scripts": [], 
   "description": "Make web content actionable", 
   "creator": "Barnaby Walters", 
   "background_scripts": [
     "main.js"
-  ],
-  "options_page": "options/index.html",
+  ], 
   "homepage_url": "http://waterpigs.co.uk/", 
   "version": "0.9", 
+  "options_page": "options/index.html", 
   "browser_button": {
     "caption": "Web Actions", 
-    "icon": "icons/button.png", 
-    "tooltipText": "Web Action Toolbelt Config"
+    "tooltipText": "Web Action Toolbelt Config", 
+    "icon": "icons/button.png"
   }, 
+  "id": "http://kangoextensions.com/extensions/webactions/", 
   "name": "Web Actions"
 }
