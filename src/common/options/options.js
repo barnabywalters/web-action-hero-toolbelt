@@ -1,30 +1,45 @@
-/*
- * Copyright (c) 2012 by Aaron Parecki. All rights reserved.  Use of this
- * source code is governed by a BSD-style license that can be found in the
- * LICENSE file.
- */
-
-function saveURL(evt) {
+/*function saveURL(evt) {
   kango.invokeAsync('kango.storage.setItem', $(evt.target).attr('id'), evt.target.value);
   
   $('#notice').text('Unsaved Changes Made!').toggleClass('unsaved');
   window.setTimeout(function () {
     $('#notice').text('Changes Saved').toggleClass('unsaved');
   }, 200);
-}
+}*/
 
-function main() {
-  $('.monitor').each(function () {
-    var self = $(this);
+var extension = extension || {};
+
+extension.config = (function () {
+    // Private
+    function makeContents() {
+        var contentsList = $('body > header > nav > ul');
+        
+        $('body > section:has(id)').each(function (i, el) {
+            var anchor = $('<a href="#'
+                    + $(el).attr('id')
+                    + '">'
+                    + $(el).children('h1')[0].textContent
+                    + '</a>');
+            
+            anchor.click(function() {
+                $('body > section:has(id)').hide();
+                $($(this).attr('href')).show();
+            });
+            
+            contentsList.append(anchor);
+        }).hide();
+        
+        $('#section-about').show();
+    }
     
-    self.keyup(saveURL);
-    
-    kango.invokeAsync('kango.storage.getItem', self.attr('id'), function (url) {
-  	  self.val(url);
-    });
-  });
-}
+    // Public
+    return {
+        init: function () {
+            makeContents();
+        }
+    };
+}());
 
 KangoAPI.onReady(function () {
-  main();
+  extension.config.init();
 });

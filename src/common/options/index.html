@@ -1,99 +1,41 @@
 <!doctype>
 <html>
-<head>
-  <title>Web Action Toolbelt Options</title>
-  <style>
-    
-  </style>
-  <script src="jquery-1.8.3.min.js"></script>
-  <script src="kango-ui/kango_api.js"></script>
-  <script src="options.js"></script>
-</head>
-<body>
-	<h1>Indieweb Reply Preferences</h1>
-	
-	<p class="notice" id="notice"></p>
-	
-	<div id="providerSelection">
-		<p>You can set different URLs to redirect to based on the verb implied through the hijack context — for example, a hijacked reply button will trigger the <code>reply</code> action, hijacked Tweet buttons will trigger the <code>post</code> action.</p>
-		
-		<p>Placeholders (in the form of <code>{name}</code>) can be inserted into these URLs, which will be replaced with the associated bit of metadata if it’s available, or an empty string otherwise.</p>
-		
-		<label><b>Post</b> &rArr; <input id="postURL" type="url" class="monitor" placeholder="http://example.org/notes/new?text={text}+{url}" /></label>
-		
-		<div class="metadata">
-			<dl class="templates">
-				<dt><code>{url}</code>
-					<dd>Expands to the (urlencoded) URL of the page you’re posting
-				<dt><code>{tweetURL}</code>
-					<dd>If retweeting, the URL of the tweet
-				<dt><code>{username}</code>
-					<dd>Twitter @name from Tweet buttons or retweets
-				<dt><code>{text}</code>
-					<dd>Pre-filled text from Tweet buttons, tweet text when retweeting on twitter.com
-				<dt><code>{hashtags}</code>
-					<dd>Any pre-filled hashtags from Tweet buttons
-			</dl>
-			<div class="replaces">
-				<p>Replaces:</p>
-				<ul>
-					<li>Tweet Buttons across the web</li>
-					<li>Twitter.com retweet buttons</li>
-				</ul>
-			</div>		
-		</div>
-		
-		<label><b>Reply</b> &rArr; <input id="replyURL" type="url" class="monitor" placeholder="http://example.com/notes/new?inReplyTo={url}&text={text}" /></label>
-		
-		<div class="metadata">
-			<dl class="templates">
-				<dt><code>{url}</code>
-					<dd>Expands to the (urlencoded) URL you’re replying to
-				<dt><code>{username}</code>
-					<dd>Expands to the @name of the Twitter user you’re replying to
-			</dl>
-			<div class="replaces">
-				<p>Replaces:</p>
-				<ul>
-					<li>Twitter.com reply links</li>
-				</ul>
-			</div>
-		</div>
-		
-		<label><b>Favourite</b> &rArr; <input id="favouriteURL" type="url" class="monitor" placeholder="http://example.com/notes/new?&text={url}+%23bookmark" /></label>
-		
-		<div class="metadata">
-			<dl class="templates">
-				<dt><code>{url}</code>
-					<dd>Expands to the (urlencoded) URL you’re favouriting
-				<dt><code>{text}</code>
-					<dd>Expands to the text of the tweet you’re replying to
-				<dt><code>{username}</code>
-					<dd>Expands to the @name of the twitter user you’re favouriting
-			</dl>
-			<div class="replaces">
-				<p>Replaces:</p>
-				<ul>
-					<li>Twitter.com favourite links</li>
-					<li>Facebook Like Buttons across the web</li>
-				</ul>
-			</div>
-		</div>
-		
-		<label><b>Follow</b> &rArr; <input id="fallowURL" type="url" class="monitor" placeholder="http://example.com/contacts/new?url={url}" /></label>
-		
-		<div class="metadata">
-			<dl class="templates">
-				<dt><code>{url}</code>
-					<dd>Expands to the (urlencoded) URL of the person you’re following
-			</dl>
-			<div class="replaces">
-				<p>Replaces:</p>
-				<ul>
-					<li>Twitter Follow Buttons across the web</li>
-				</ul>
-			</div>
-		</div>
-	</div>
-</body>
+    <head>
+        <title>Web Action Toolbelt Options</title>
+        <style>
+
+        </style>
+        <script src="jquery-1.8.3.min.js"></script>
+        <script src="kango-ui/kango_api.js"></script>
+        <script src="options.js"></script>
+    </head>
+    <body>
+        <header>
+            <h1>Web Action Hero Toolbelt</h1>
+            <nav>
+                <ul></ul>
+            </nav>
+        </header>
+
+        <section id="section-about">
+
+        </section>
+
+        <section id="section-twitter-com">
+
+        </section>
+
+        <section id="section-buttons">
+
+        </section>
+
+        <section id="section-verbs">
+
+        </section>
+
+        <section id="section-voting">
+
+        </section>
+
+    </body>
 </html>
