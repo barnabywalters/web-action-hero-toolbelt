@@ -11,6 +11,10 @@ var extension = extension || {};
 
 extension.config = (function () {
     // Private
+    function loadTemplate(name) {
+        return $('script.template#' + name).text();
+    }
+    
     function makeContents() {
         var contentsList = $('body > header > nav > ul');
         
@@ -32,18 +36,58 @@ extension.config = (function () {
         $('#section-about').show();
     }
     
-    function saveVerbs() {
+    function addVerbServiceList(el, verb) {
+        var serviceList = $('<ul />');
         
+        verb.services.forEach(function (service, i) {
+            var template = loadTemplate('service-item-template');
+            template.split('{name}').join(service.name);
+            template.split('{url}').join(service.url);
+            
+            var el = $(template);
+            
+            if (verb.default === i)
+                el.children('.service-default').attr('checked', 'checked');
+            
+            serviceList.append(el);
+        });
+    }
+    
+    function setUpUI(config) {
+        var actionVerbs = $('#web-actions');
+        
+        config.verbs.forEach(function (verb) {
+            if (verb.section === 'web-actions') {
+                var verbEl = $('<section/>')
+                    .attr('class', 'verb')
+                    .attr('data-verb', verb.name)
+                    .append('<h3>' + verb.name + '</h3>');
+                
+                addVerbServiceList(verbEl, verb);
+                
+                actionVerbs.append(verbEl);
+            } else {
+                // TODO: section-specific verbs
+            }
+        });
+        
+        // TODO: Activate URL list editing
+    }
+    
+    function saveVerbs() {
+        // TODO
     }
     
     // Public
     return {
-        init: function () {
+        init: function (config) {
             makeContents();
+            
+            setUpUI(config || { verbs: [] });
         }
     };
 }());
 
 KangoAPI.onReady(function () {
-  extension.config.init();
+    kango.invokeAsync('kango.storage.getItem', 'config', extension.config.init);
 });

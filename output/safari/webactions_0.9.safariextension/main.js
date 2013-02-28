@@ -12,9 +12,3 @@ WebActionsExtension.prototype = {
 };
 
 var extension = new WebActionsExtension();
-
-kango.browser.windows.create({
-    url: "http://waterpigs.co.uk",
-    width: 500,
-    height: 500
-});

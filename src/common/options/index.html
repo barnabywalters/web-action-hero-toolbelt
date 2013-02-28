@@ -8,6 +8,14 @@
         <script src="../jquery-1.8.3.min.js"></script>
         <script src="../kango-ui/kango_api.js"></script>
         <script src="options.js"></script>
+        
+        <script type="text/template" class="template" id="service-item-template">
+            <li class="service">
+                <input class="service-default" type="radio" name="{name}-default" />
+                <input class="service-name" type="text" value="{name}" />:
+                <input class="service-url" type="url" value="{url}" />
+            </li>
+        </script>
     </head>
     <body>
         <header>
@@ -73,6 +81,8 @@
 
         <section id="section-selection">
             <h2>Selection</h2>
+            
+            <p>Not yet implemented — this will allow you to take actions on selected parts of content.</p>
         </section>
 
     </body>
