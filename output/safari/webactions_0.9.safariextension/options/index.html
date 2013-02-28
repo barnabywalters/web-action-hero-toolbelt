@@ -10,11 +10,20 @@
         <script src="options.js"></script>
         
         <script type="text/template" class="template" id="service-item-template">
-            <li class="service">
-                <input class="service-default" type="radio" name="{name}-default" />
-                <input class="service-name" type="text" value="{name}" />:
-                <input class="service-url" type="url" value="{url}" />
-            </li>
+            <tr class="service">
+                <td><input class="service-default" type="radio" name="{name}-default" /></td>
+                <td><input class="service-name" type="text" placeholder="Service Name" value="{name}" />:</td>
+                <td><input class="service-url" type="url" placeholder="http://example.com/action?url={url}" value="{url}" /></td>
+                <td class="deletion-control"></td>
+            </tr>
+        </script>
+        <script type="text/template" class="template" id="add-service-template">
+            <tr class="add-service-container">
+                <td><button class="add-service-control">Add Service</button></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
         </script>
     </head>
     <body>
@@ -44,14 +53,20 @@
             
             <section class="verb" data-verb="twitter-reply">
                 <h3>Reply</h3>
+                
+                <table class="services"></table>
             </section>
             
             <section class="verb" data-verb="twitter-retweet">
                 <h3>Retweet</h3>
+                
+                <table class="services"></table>
             </section>
             
             <section class="verb" data-verb="twitter-favourite">
                 <h3>Favourite</h3>
+                
+                <table class="services"></table>
             </section>
         </section>
 
@@ -60,10 +75,14 @@
             
             <section class="verb" data-verb="button-tweet">
                 <h3>Tweet Buttons</h3>
+                
+                <table class="services"></table>
             </section>
             
             <section class="verb" data-verb="button-plus-one">
                 <h3>+1 Buttons</h3>
+                
+                <table class="services"></table>
             </section>
         </section>
 

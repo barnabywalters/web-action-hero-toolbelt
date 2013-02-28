@@ -4,8 +4,6 @@
 <dict>
 	<key>Author</key>
 	<string>Barnaby Walters</string>
-	<key>Builder Version</key>
-	<string>6534.57.2</string>
 	<key>CFBundleDisplayName</key>
 	<string>Web Actions</string>
 	<key>CFBundleIdentifier</key>
@@ -19,7 +17,7 @@
 	<key>Chrome</key>
 	<dict>
 		<key>Database Quota</key>
-		<real>10485760</real>
+		<real>10485760.0</real>
 		<key>Global Page</key>
 		<string>background.html</string>
 		<key>Popovers</key>
@@ -50,11 +48,6 @@
 				<string>Web Actions</string>
 			</dict>
 		</array>
-	</dict>
-	<key>Content</key>
-	<dict>
-		<key>Scripts</key>
-		<dict/>
 	</dict>
 	<key>Description</key>
 	<string>Make web content actionable</string>

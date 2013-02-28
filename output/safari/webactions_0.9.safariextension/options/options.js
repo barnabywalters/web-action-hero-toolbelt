@@ -11,10 +11,13 @@ var extension = extension || {};
 
 extension.config = (function () {
     // Private
+    
+    // Load a template str by name
     function loadTemplate(name) {
         return $('script.template#' + name).text();
     }
     
+    // Generate navigation and hidey-showey tabs
     function makeContents() {
         var contentsList = $('body > header > nav > ul');
         
@@ -36,13 +39,18 @@ extension.config = (function () {
         $('#section-about').show();
     }
     
-    function addVerbServiceList(el, verb) {
-        var serviceList = $('<ul />');
+    // Given a .verb element and a verb obj, ensure ul.services exists and
+    // populate it
+    function populateVerbServiceList(el, verb) {
+        if ($(el).children('table.services').length === 0)
+            var serviceList = $('<table />').attr('class', 'services');
+        else
+            var serviceList = $(el).children('ul.services');
         
         verb.services.forEach(function (service, i) {
             var template = loadTemplate('service-item-template');
-            template.split('{name}').join(service.name);
-            template.split('{url}').join(service.url);
+            template = template.split('{name}').join(service.name);
+            template = template.split('{url}').join(service.url);
             
             var el = $(template);
             
@@ -53,6 +61,40 @@ extension.config = (function () {
         });
     }
     
+    function addDeletionControls(el) {
+        el.find('.deletion-control').append($('<button />')
+            .text('-')
+            .click(function () {
+                $(this).closest('.service').remove();
+            }));
+    }
+    
+    // Given a .verb element, set up all the service add/edit UI
+    function setUpVerbServiceUI(el) {
+        e = $(el);
+        
+        var serviceTable = e.children('.services');
+        
+        // Add deletion controls
+        addDeletionControls(serviceTable);
+        
+        // Add a plus button which adds an empty row based on the template
+        serviceTable.append($(loadTemplate('add-service-template'))
+                .find('.add-service-control')
+                .click(function () {
+                    templ = loadTemplate('service-item-template');
+                    templ = templ.split('{url}').join('');
+                    templ = templ.split('{name}').join('');
+                    
+                    row = $(templ);
+                    
+                    addDeletionControls(row);
+                    
+                    $(this).before(row);
+                }));
+    }
+    
+    // Init the config UI
     function setUpUI(config) {
         var actionVerbs = $('#web-actions');
         
@@ -63,15 +105,23 @@ extension.config = (function () {
                     .attr('data-verb', verb.name)
                     .append('<h3>' + verb.name + '</h3>');
                 
-                addVerbServiceList(verbEl, verb);
+                populateVerbServiceList(verbEl, verb);
                 
                 actionVerbs.append(verbEl);
             } else {
-                // TODO: section-specific verbs
+                // section-specific verbs
+                var verbEl = $('section#'
+                        + verb.section
+                        + ' .verb[data-verb='
+                        + verb.name
+                        + ']');
+                
+                populateVerbServiceList(verbEl, verb);
             }
         });
         
-        // TODO: Activate URL list editing
+        // Activate URL list editing
+        $('.verb').toArray().forEach(setUpVerbServiceUI);
     }
     
     function saveVerbs() {
