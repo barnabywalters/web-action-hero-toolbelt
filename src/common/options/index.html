@@ -19,18 +19,56 @@
 
         <section id="section-about">
             <h2>About</h2>
+            
+            <p>This extension is two things: an experimental polyfill for web actions, and a utility for converting existing markup into web actions.</p>
+            
+            <p>You can set multiple service URLs for each action, one of which is the default. The default URL will be used on button click, the others are only a dropdown away.</p>
+            
+            <p>There are some URL template placeholders available for use in your URLs. <code>{url}</code> is always available and expands to either the URL specified by the button, the page’s canonical URL, or the current URL.</p>
+            
+            <p>For some of the injected web actions there are other placeholders available — they’re documented in their sections.</p>
+            
+            <p>If you specify no delegate URLs for a particular replacement, it will not be replaced and will work as normal.</p>
         </section>
 
         <section id="section-twitter-com">
             <h2>Twitter.com</h2>
+            
+            <section class="verb" data-verb="twitter-reply">
+                <h3>Reply</h3>
+            </section>
+            
+            <section class="verb" data-verb="twitter-retweet">
+                <h3>Retweet</h3>
+            </section>
+            
+            <section class="verb" data-verb="twitter-favourite">
+                <h3>Favourite</h3>
+            </section>
         </section>
 
         <section id="section-buttons">
             <h2>Social Buttons</h2>
+            
+            <section class="verb" data-verb="button-tweet">
+                <h3>Tweet Buttons</h3>
+            </section>
+            
+            <section class="verb" data-verb="button-plus-one">
+                <h3>+1 Buttons</h3>
+            </section>
         </section>
 
         <section id="section-web-actions">
             <h2>Web Action Verbs</h2>
+            
+            <p>In order to utilise web action markup in a page, you need to specify all the different verbs you want to be able to handle.</p>
+            
+            <p>Web actions are highly experimental and currently there is no registry of common verbs.</p>
+            
+            <p>TODO: Make some UI which does verb fallback and verb-in-place really well</p>
+            
+            <div class="verbs"></div>
         </section>
 
         <section id="section-selection">

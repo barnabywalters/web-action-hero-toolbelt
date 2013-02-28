@@ -32,10 +32,13 @@ extension.config = (function () {
         $('#section-about').show();
     }
     
+    function saveVerbs() {
+        
+    }
+    
     // Public
     return {
         init: function () {
-            kango.console.log('Config UI Init');
             makeContents();
         }
     };
