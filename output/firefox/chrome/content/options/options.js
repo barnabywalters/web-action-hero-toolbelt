@@ -117,9 +117,21 @@ extension.config = (function () {
     
     // Init the config UI
     function setUpUI(config) {
-        var actionVerbs = $('#web-actions');
+        var actionVerbs = $('#section-web-actions');
         
         // TODO: Set up add-new-verb UI
+        var verbContainer = actionVerbs.find('.verbs');
+        var addVerbButton = $(loadTemplate('add-verb-template'))
+            .click(function () {
+                var templ = loadTemplate('verb-template');
+                var el = $(templ.split('{name}').join('new-verb'));
+                
+                verbContainer.append(el);
+                setUpVerbServiceUI(el);
+                setUpVerbUI(el);
+            });
+        
+        verbContainer.after(addVerbButton);
         
         config.verbs.forEach(function (verb) {
             if (verb.section === 'web-actions') {
