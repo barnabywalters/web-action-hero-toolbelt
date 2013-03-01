@@ -19,7 +19,7 @@ extension.config = (function () {
     
     // Generate navigation and hidey-showey tabs
     function makeContents() {
-        var contentsList = $('body > header > nav > ul');
+        var contentsList = $('body > nav > ul');
         
         $('body > section').each(function (i, el) {
             var anchor = $('<a href="#'

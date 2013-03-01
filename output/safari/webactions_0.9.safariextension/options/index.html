@@ -3,8 +3,48 @@
     <head>
         <title>Web Action Toolbelt Options</title>
         <style>
+            * {
+                box-sizing: border-box;
+                font-family: Helvetica Neue, Helvetica, sans-serif;
+            }
+            
+            body {
+                font-size: 18px;
+            }
+            
             .verb {
                 background: #eee;
+                padding: 1em;
+                margin-bottom: 0.5em;
+            }
+            
+            .verb > h3 {
+                margin: 0;
+            }
+            
+            body > nav {
+                width: 20%;
+                float: left;
+            }
+            
+            body > section {
+                width: 80%;
+                float: left;
+            }
+            
+            .service-url {
+                width: 30em;
+            }
+            
+            code {
+                color: #06a;
+            }
+            
+            input:not([type]),
+            input[type=text],
+            input[type=url],
+            button {
+                font-size: 16px;
             }
         </style>
         
@@ -15,7 +55,7 @@
         <script type="text/template" class="template" id="service-item-template">
             <tr class="service">
                 <td><input class="service-default" type="radio" name="{verb}-default" /></td>
-                <td><input class="service-name" type="text" placeholder="Service Name" value="{name}" />:</td>
+                <td><input class="service-name" type="text" placeholder="Service Name" value="{name}" /> &rarr; </td>
                 <td><input class="service-url" type="url" placeholder="http://example.com/action?url={url}" value="{url}" /></td>
                 <td class="deletion-control"></td>
             </tr>
@@ -42,13 +82,12 @@
         </script>
     </head>
     <body>
-        <header>
-            <h1>Web Action Hero Toolbelt</h1>
-            <nav>
-                <ul></ul>
-            </nav>
-        </header>
-
+        <h1>Web Action Hero Toolbelt</h1>
+        
+        <nav>
+            <ul></ul>
+        </nav>
+        
         <section id="section-about">
             <h2>About</h2>
             
