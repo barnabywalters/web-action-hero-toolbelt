@@ -30,7 +30,9 @@
         </script>
         <script type="text/template" class="template" id="verb-template">
             <section class="verb" data-verb="{name}">
-                <h3 class="editable">{name}</h3>
+                <input class="verb-name" value="{name}" />
+                
+                <button class="deletion-control">-</button>
                 
                 <table class="services"></table>
             </section>

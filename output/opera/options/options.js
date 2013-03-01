@@ -110,9 +110,19 @@ extension.config = (function () {
                 }));
     }
     
-    // Given a managable .verb, add deletion and name customisation UI
+    // Given a managable (non-replaced) .verb, add deletion and name 
+    // customisation UI
     function setUpVerbUI(el) {
+        var e = $(el);
         
+        e.find('.deletion-control').click(function () {
+            e.remove();
+        });
+        
+        e.find('.verb-name').on('keyup mouseup blur change', function () {
+            e.attr('data-verb', $(this).val());
+            e.find('.service-default').attr('name', $(this).val() + '-default');
+        })
     }
     
     // Init the config UI
@@ -123,6 +133,15 @@ extension.config = (function () {
         var verbContainer = actionVerbs.find('.verbs');
         var addVerbButton = $(loadTemplate('add-verb-template'))
             .click(function () {
+                // Prevent addition if there’s already a blank verb
+                var verbs = verbContainer.find('.verb');
+                if (verbs.length !== 0
+                        && verbs.last().attr('data-verb') === 'new-verb') {
+                    verbs.last().find('.verb-name').focus();
+                    return;
+                }
+                
+                // Create new verb UI
                 var templ = loadTemplate('verb-template');
                 var el = $(templ.split('{name}').join('new-verb'));
                 
