@@ -1,6 +1,8 @@
 {
   "kango_version": "1.0.1 final", 
-  "content_scripts": [], 
+  "content_scripts": [
+    "shim.js"
+  ], 
   "description": "Make web content actionable", 
   "creator": "Barnaby Walters", 
   "background_scripts": [

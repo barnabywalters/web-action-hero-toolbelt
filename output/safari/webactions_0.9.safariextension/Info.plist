@@ -54,7 +54,21 @@
 	<key>Content</key>
 	<dict>
 		<key>Scripts</key>
-		<dict/>
+		<dict>
+			<key>Start</key>
+			<array>
+				<string>includes/content_kango.js</string>
+				<string>kango/invoke_async_module.js</string>
+				<string>kango/message_target_module.js</string>
+				<string>kango/userscript_client.js</string>
+				<string>includes/content_init.js</string>
+			</array>
+		</dict>
+		<key>Whitelist</key>
+		<array>
+			<string>http://*/*</string>
+			<string>https://*/*</string>
+		</array>
 	</dict>
 	<key>Description</key>
 	<string>Make web content actionable</string>
