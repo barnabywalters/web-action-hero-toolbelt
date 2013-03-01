@@ -24,9 +24,46 @@ var WebActionHero = (function() {
                 $("a.js-action-reply").each(function(i, e) {
                     var el = $(e);
                     var tweet = el.parents('.tweet');
-                    var url = "https://twitter.com/" + $(tweet).data('screen-name') + "/status/" + $(tweet).attr('data-item-id');
-                    
+                    var url = "https://twitter.com/"
+                            + tweet.data('screen-name')
+                            + "/status/"
+                            + tweet.attr('data-item-id');
+
                     var webActionEl = $(getWebAction('twitter-reply', url));
+
+                    el.replaceWith(webActionEl);
+                });
+            }
+        },
+        {
+            verb: 'twitter-retweet',
+            replace: function($) {
+                $("a.js-toggle-rt").each(function(i, e) {
+                    var el = $(e);
+                    var tweet = el.parents(".tweet");
+                    var url = "https://twitter.com/"
+                            + tweet.data('screen-name')
+                            + "/status/"
+                            + tweet.attr('data-item-id');
+
+                    var webActionEl = $(getWebAction('twitter-retweet', url));
+
+                    el.replaceWith(webActionEl);
+                });
+            }
+        },
+        {
+            verb: 'twitter-favourite',
+            replace: function($) {
+                $("a.js-toggle-fav").each(function(i, e) {
+                    var el = $(e);
+                    var tweet = el.parents('.tweet');
+                    var url = "https://twitter.com/"
+                            + tweet.data('screen-name')
+                            + "/status/"
+                            + tweet.attr('data-item-id');
+                    
+                    var webActionEl = $(getWebAction('twitter-favourite', url));
                     
                     el.replaceWith(webActionEl);
                 });
@@ -36,13 +73,13 @@ var WebActionHero = (function() {
 
     // Returns the verb object or null for verb name
     function getVerb(name) {
-        for (var i = 0;i < verbs.length;i++) {
+        for (var i = 0; i < verbs.length; i++) {
             if (verbs[i].name === name) {
                 kango.console.log('Verb ' + name + ' found');
                 return verbs[i];
             }
         }
-        
+
         kango.console.log('Verb ' + name + ' not found');
         return null;
     }
@@ -51,7 +88,7 @@ var WebActionHero = (function() {
     // defined for a given verb
     function verbDefined(name) {
         var verb = getVerb(name);
-        
+
         if (verb === null)
             return false;
 
@@ -75,7 +112,7 @@ var WebActionHero = (function() {
     function main(config) {
         kango.console.log('main() called with config:');
         kango.console.log(config);
-        
+
         verbs = config.verbs;
         replace();
         activateWebActions();
@@ -87,11 +124,11 @@ var WebActionHero = (function() {
         var toReplace = replacements.filter(function(item) {
             return verbDefined(item.verb);
         });
-        
+
         kango.console.log('Replacing verbs:');
         kango.console.log(toReplace);
-        
-        toReplace.forEach(function (replacement) {
+
+        toReplace.forEach(function(replacement) {
             kango.console.log('Replacing for verb ' + replacement.verb);
             replacement.replace($);
         });
