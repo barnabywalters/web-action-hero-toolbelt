@@ -11,7 +11,7 @@
         
         <script type="text/template" class="template" id="service-item-template">
             <tr class="service">
-                <td><input class="service-default" type="radio" name="{name}-default" /></td>
+                <td><input class="service-default" type="radio" name="{verb}-default" /></td>
                 <td><input class="service-name" type="text" placeholder="Service Name" value="{name}" />:</td>
                 <td><input class="service-url" type="url" placeholder="http://example.com/action?url={url}" value="{url}" /></td>
                 <td class="deletion-control"></td>
@@ -24,6 +24,13 @@
                 <td></td>
                 <td></td>
             </tr>
+        </script>
+        <script type="text/template" class="template" id="verb-template">
+            <section class="verb" data-verb="{name}">
+                <h3 class="editable">{name}</h3>
+                
+                <table class="services"></table>
+            </section>
         </script>
     </head>
     <body>

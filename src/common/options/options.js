@@ -42,7 +42,7 @@ extension.config = (function () {
     // Given a .verb element and a verb obj, ensure ul.services exists and
     // populate it
     function populateVerbServiceList(el, verb) {
-        if ($(el).children('table.services').length === 0)
+        if ($(el).find('table.services').length === 0)
             var serviceList = $('<table />').attr('class', 'services');
         else
             var serviceList = $(el).children('ul.services');
@@ -51,6 +51,7 @@ extension.config = (function () {
             var template = loadTemplate('service-item-template');
             template = template.split('{name}').join(service.name);
             template = template.split('{url}').join(service.url);
+            template = template.split('{verb}').join(verb.name);
             
             var el = $(template);
             
@@ -65,15 +66,27 @@ extension.config = (function () {
         el.find('.deletion-control').append($('<button />')
             .text('-')
             .click(function () {
+                var curVerb = $(this).closest('.verb');
                 $(this).closest('.service').remove();
+                ensureDefaultService(curVerb);
             }));
+    }
+    
+    // Given a .verb, ensures that there’s a checked default service. Sets first
+    // one if none found.
+    function ensureDefaultService(el) {
+        if ($(el).find('.services .service-default:checked').length !== 0)
+            return;
+        
+        $(el).find('.services .service-default').first().attr('checked', 'checked');
     }
     
     // Given a .verb element, set up all the service add/edit UI
     function setUpVerbServiceUI(el) {
-        e = $(el);
+        var e = $(el);
+        var verb = e.attr('data-verb');
         
-        var serviceTable = e.children('.services');
+        var serviceTable = e.find('.services');
         
         // Add deletion controls
         addDeletionControls(serviceTable);
@@ -85,25 +98,33 @@ extension.config = (function () {
                     templ = loadTemplate('service-item-template');
                     templ = templ.split('{url}').join('');
                     templ = templ.split('{name}').join('');
+                    templ = templ.split('{verb}').join(verb);
                     
                     row = $(templ);
                     
                     addDeletionControls(row);
                     
                     $(this).before(row);
+                    
+                    ensureDefaultService(el);
                 }));
+    }
+    
+    // Given a managable .verb, add deletion and name customisation UI
+    function setUpVerbUI(el) {
+        
     }
     
     // Init the config UI
     function setUpUI(config) {
         var actionVerbs = $('#web-actions');
         
+        // TODO: Set up add-new-verb UI
+        
         config.verbs.forEach(function (verb) {
             if (verb.section === 'web-actions') {
-                var verbEl = $('<section/>')
-                    .attr('class', 'verb')
-                    .attr('data-verb', verb.name)
-                    .append('<h3>' + verb.name + '</h3>');
+                var templ = loadTemplate('verb-template');
+                var verbEl = $(templ.split('{name}').join(verb.name));
                 
                 populateVerbServiceList(verbEl, verb);
                 
@@ -117,6 +138,7 @@ extension.config = (function () {
                         + ']');
                 
                 populateVerbServiceList(verbEl, verb);
+                ensureDefaultService(verbEl);
             }
         });
         
