@@ -43,9 +43,9 @@ extension.config = (function () {
     // populate it
     function populateVerbServiceList(el, verb) {
         if ($(el).find('table.services').length === 0)
-            var serviceList = $('<table />').attr('class', 'services');
-        else
-            var serviceList = $(el).children('ul.services');
+            $(el).append($('<table />').attr('class', 'services'));
+        
+        var serviceList = $(el).find('table.services');
         
         verb.services.forEach(function (service, i) {
             var template = loadTemplate('service-item-template');
@@ -56,7 +56,7 @@ extension.config = (function () {
             var el = $(template);
             
             if (verb.default === i)
-                el.children('.service-default').attr('checked', 'checked');
+                el.find('.service-default').attr('checked', 'checked');
             
             serviceList.append(el);
         });
@@ -129,7 +129,10 @@ extension.config = (function () {
     function setUpUI(config) {
         var actionVerbs = $('#section-web-actions');
         
-        // TODO: Set up add-new-verb UI
+        kango.console.log('Setting up UI with config:');
+        kango.console.log(config);
+        
+        // Set up add-new-verb UI
         var verbContainer = actionVerbs.find('.verbs');
         var addVerbButton = $(loadTemplate('add-verb-template'))
             .click(function () {
@@ -149,17 +152,17 @@ extension.config = (function () {
                 setUpVerbServiceUI(el);
                 setUpVerbUI(el);
             });
-        
         verbContainer.after(addVerbButton);
         
         config.verbs.forEach(function (verb) {
-            if (verb.section === 'web-actions') {
+            if (verb.section === 'section-web-actions') {
                 var templ = loadTemplate('verb-template');
                 var verbEl = $(templ.split('{name}').join(verb.name));
                 
                 populateVerbServiceList(verbEl, verb);
                 
-                actionVerbs.append(verbEl);
+                verbContainer.append(verbEl);
+                setUpVerbUI(verbEl);
             } else {
                 // section-specific verbs
                 var verbEl = $('section#'
@@ -178,7 +181,38 @@ extension.config = (function () {
     }
     
     function saveVerbs() {
-        // TODO
+        var config = { verbs: [] };
+        
+        // Go through verb markup and store verb objects
+        $('.verb').each(function (i, el) {
+            var verb = {};
+            var e = $(el);
+            
+            verb.name = e.attr('data-verb');
+            verb.section = e.closest('section[id]').attr('id');
+            verb.services = [];
+            
+            // Add all service objects
+            $('.services .service', e).each(function (ii, sEl) {
+                var service = {};
+                var s = $(sEl);
+                
+                service.name = s.find('.service-name').val();
+                service.url = s.find('.service-url').val();
+                
+                verb.services.push(service);
+                
+                if (s.find('.service-default:checked').length === 1)
+                    verb.default = ii;
+            });
+            
+            config.verbs.push(verb);
+        });
+        
+        kango.invokeAsync('kango.storage.setItem', 'config', config, function () {
+            kango.console.log('Config info saved:');
+            kango.console.log(config);
+        });
     }
     
     // Public
@@ -187,6 +221,9 @@ extension.config = (function () {
             makeContents();
             
             setUpUI(config || { verbs: [] });
+            
+            // Save everything automatically every 5 seconds
+            setInterval(saveVerbs, 5000);
         }
     };
 }());
