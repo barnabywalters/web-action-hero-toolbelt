@@ -85,11 +85,17 @@ But if I take all of these buttons away in favour of some experimental technolog
 
 Non-supporting agents will show the buttons, supporting agents will replace them with a UI tailored to the user.
 
-### Isn’t this just [web intents|web activities|x other technology]?
+### Isn’t this just [web intents | web activities | x other technology]?
 
 No. Web Actions are a user-centric reframing of dev-centric web intents, the &lt;action&gt; element is a simple, experimental implementation designed so we can start using this pattern straight away. Only through real world usage will we discover the best solution to these problems.
 
 ## Questions without answers (yet)
+
+### Most people don’t understand URL APIs — why doesn’t this autodiscover services like web intents?
+
+Because that’s complicated. It would require services to explicitly declare what verbs (which we haven’t agreed on yet) they can handle, and lots and lots of UI programming to be done.
+
+This is *not* an end product, it is a prototype made so interested parties can get stuck in using this markup now and understanding these patterns now. We’ll handle making it super easy to use later, if it’s well-received.
 
 ### What verbs should I use?
 
