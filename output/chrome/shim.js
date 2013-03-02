@@ -11,7 +11,7 @@ var WebActionHero = (function() {
     var verbs;
     var webActionTemplate = [
         '<div style="display:inline-block; padding-right: 0.33em; border:#555 solid 1px; border-radius: 0.3em;" class="web-action-hero-toolbelt-button">',
-        '<button style="padding:0.5em">Verb This</button>',
+        '<button>Verb This</button>',
         '<select style="width: 1.5em;">',
         '<option selected disabled>Select a service:</option>',
         '</select>',
