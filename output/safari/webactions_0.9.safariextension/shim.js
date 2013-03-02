@@ -91,7 +91,7 @@ var WebActionHero = (function() {
                 $('.twitter-share-button, .twitter-mention-button, .twitter-hashtag-button')
                         .each(function(i, e) {
                     var el = $(e);
-                    var url = el.attr('data-url');
+                    var url = el.attr('data-url') || document.location.href;
 
                     /**
                      * if I find buttons still using iframes (they seem to not be)
