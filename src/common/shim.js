@@ -2,6 +2,7 @@
 // @name Web Actions Shim
 // @include *
 // @require zepto.min.js
+// @require URI.js
 // ==/UserScript==
 
 var WebActionHero = (function() {
@@ -12,16 +13,29 @@ var WebActionHero = (function() {
         '<div style="display:inline-block; padding-right: 0.33em; border:#555 solid 1px; border-radius: 0.3em;" class="web-action-hero-toolbelt-button">',
         '<button style="padding:0.5em">Verb This</button>',
         '<select style="width: 1.5em;">',
-            '<option selected disabled>Select a service:</option>',
+        '<option selected disabled>Select a service:</option>',
         '</select>',
         '</div>'
     ].join('');
+
+    function parseQueryString(url) {
+        var uri = new URI(url);
+        return uri.search(true);
+    }
+
+    function parseQueryStringFragment(url) {
+        var uri = new URI(url);
+        var fragment = '?' + uri.fragment();
+        var fragURI = new URI(fragment);
+
+        return fragURI.search(true);
+    }
 
     // Array of replacement objects r with r.verb and r.replace(zepto).
     // r.replace does in-place replacement, probably calling getWebAction
     var replacements = [
         {
-            verb: 'twitter-reply',
+            verb: 'twitter-reply', // reply UI on twitter.com
             replace: function($) {
                 $("a.js-action-reply").each(function(i, e) {
                     var el = $(e);
@@ -38,7 +52,7 @@ var WebActionHero = (function() {
             }
         },
         {
-            verb: 'twitter-retweet',
+            verb: 'twitter-retweet', // retweet UI on twitter.com
             replace: function($) {
                 $("a.js-toggle-rt").each(function(i, e) {
                     var el = $(e);
@@ -55,7 +69,7 @@ var WebActionHero = (function() {
             }
         },
         {
-            verb: 'twitter-favourite',
+            verb: 'twitter-favourite', // favourite UI on twitter.com
             replace: function($) {
                 $("a.js-toggle-fav").each(function(i, e) {
                     var el = $(e);
@@ -64,9 +78,29 @@ var WebActionHero = (function() {
                             + tweet.data('screen-name')
                             + "/status/"
                             + tweet.attr('data-item-id');
-                    
+
                     var webActionEl = $(getWebAction('twitter-favourite', url));
+
+                    el.replaceWith(webActionEl);
+                });
+            }
+        },
+        {
+            verb: 'tw-tweet', // Tweet buttons across the web
+            replace: function($) {
+                $('.twitter-share-button, .twitter-mention-button, .twitter-hashtag-button')
+                        .each(function(i, e) {
+                    var el = $(e);
+                    var url = el.attr('data-url');
                     
+                    /**
+                     * if I find buttons still using iframes (they seem to not be)
+                     * then use parseQueryStringFragment to get properties
+                     */
+                    
+                    var webActionEl = $(getWebAction('tw-tweet', url));
+                    
+                    el.siblings('[abtwitterbadge]').remove();
                     el.replaceWith(webActionEl);
                 });
             }
@@ -80,7 +114,7 @@ var WebActionHero = (function() {
                 return verbs[i];
             }
         }
-        
+
         return null;
     }
 
@@ -124,21 +158,21 @@ var WebActionHero = (function() {
         var toReplace = replacements.filter(function(item) {
             return verbDefined(item.verb);
         });
-        
+
         toReplace.forEach(function(replacement) {
             kango.console.log('Replacing for verb ' + replacement.verb);
             replacement.replace($);
         });
     }
-    
+
     function getActionDispatcher(delegateURL, withURL) {
         var dispatch = delegateURL.split('{url}').join(encodeURIComponent(withURL));
-        
-        return function () {
+
+        return function() {
             window.open(dispatch);
         };
     }
-    
+
     // Goes through all <action> elements, replaces their fallback content with
     // a verb UI
     function activateWebActions() {
@@ -148,12 +182,12 @@ var WebActionHero = (function() {
             var button = ui.find('button');
             var options = ui.find('select');
             var url = el.attr('with');
-            
+
             var verb = getVerb(el.attr('do'));
-            
+
             button.text(verb.name);
-            
-            verb.services.forEach(function (service, i) {
+
+            verb.services.forEach(function(service, i) {
                 if (i === verb.default) {
                     button.attr('title', service.name);
                     button.click(getActionDispatcher(service.url, url));
@@ -161,21 +195,21 @@ var WebActionHero = (function() {
                     var option = $('<option />');
                     option.text(service.name);
                     option.attr('data-dispatch-url', service.url);
-                    
+
                     options.append(option);
                 }
             });
-            
-            options.change(function () {
+
+            options.change(function() {
                 dispatch = getActionDispatcher(url, $(this).attr('data-dispatch-url'));
                 dispatch();
             });
-            
+
             kango.console.log('There are ' + options.children().length + ' options');
             if (options.children().length === 1) {
                 options.remove();
             }
-            
+
             // Replace contents of <action> with ui
             el.replaceWith(ui);
         });
@@ -193,4 +227,4 @@ var WebActionHero = (function() {
 }());
 
 WebActionHero.setZepto(Zepto);
-window.setTimeout(WebActionHero.init, 1000);
+window.setTimeout(WebActionHero.init, 1);
