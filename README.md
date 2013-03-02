@@ -69,7 +69,7 @@ But what if people aren’t using twitter? Surely I should add a load of others 
 </footer>
 ```
 
-But if I take all of these buttons away in favour of some experimental technology no-one uses, there won’t really be any benefit. The `action` element is back-compatible with current markup. Just wrap all buttons which represent a particular verb in that `action`:
+But if I take all of these buttons away in favour of some experimental technology no-one uses, there won’t really be any benefit. So, the `action` element is back-compatible with current markup. Just wrap all buttons which represent a particular verb in that `action`:
 
 ```html
 <footer>
