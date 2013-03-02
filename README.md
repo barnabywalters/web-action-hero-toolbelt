@@ -5,9 +5,7 @@ A cross-browser extension which does two things:
 1. Replaces social sharing buttons with &lt;action&gt; elements
 1. Activates &lt;action&gt; elements
 
-## Video Intro
-
-<iframe width="420" height="315" src="https://www.youtube-nocookie.com/embed/9OAfvuKCsEk" frameborder="0" allowfullscreen></iframe>
+<p>Watch a [demo video](https://www.youtube.com/watch?v=9OAfvuKCsEk).</p>
 
 ## Installation
 
