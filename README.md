@@ -5,7 +5,7 @@ A cross-browser extension which does two things:
 1. Replaces social sharing buttons with &lt;action&gt; elements
 1. Activates &lt;action&gt; elements
 
-<p>Watch a [demo video](https://www.youtube.com/watch?v=9OAfvuKCsEk).</p>
+Watch a [demo video](https://www.youtube.com/watch?v=9OAfvuKCsEk).
 
 ## Installation
 
