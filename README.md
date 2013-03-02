@@ -47,33 +47,39 @@ An experimental bit of markup for implementing the Web Action pattern in a way b
 
 For example, say you’re a blogger and you want people to be able to share your content. You might decide to put some social sharing buttons at the bottom of your articles:
 
-    <article class="h-entry">
-    	<h1 class="p-name">My Awesome Blog Post</h1>
-    	
-    	<div class="e-content">•••</div>
-    	
-    	<footer>
-    		<p>Share this post: <a href="•••">Tweet Button</a>
-    	</footer>
-	</article>
+```html
+<article class="h-entry">
+	<h1 class="p-name">My Awesome Blog Post</h1>
+	
+	<div class="e-content">•••</div>
+	
+	<footer>
+		<p>Share this post: <a href="•••">Tweet Button</a>
+	</footer>
+</article>
+```
 
 But what if people aren’t using twitter? Surely I should add a load of others (facebook, google plus, linkedin, reddit, etc.) — and all of a sudden you’re a [button slut](http://www.flatfrogblog.com/2011/08/07/web-actions/):
 
-	<footer>
-		<a href="•••">Tweet Button</a>
-		<a href="•••">+1 Button</a>
-		<a href="•••">Like Button</a>
-	</footer>
+```html
+<footer>
+	<a href="•••">Tweet Button</a>
+	<a href="•••">+1 Button</a>
+	<a href="•••">Like Button</a>
+</footer>
+```
 
 But if I take all of these buttons away in favour of some experimental technology no-one uses, there won’t really be any benefit. The `action` element is back-compatible with current markup. Just wrap all buttons which represent a particular verb in that `action`:
 
-	<footer>
-		<action do="share" with="http://example.com/this/page">
-			<a href="•••">Tweet Button</a>
-			<a href="•••">+1 Button</a>
-			<a href="•••">Like Button</a>
-		</action>
-	</footer>
+```html
+<footer>
+	<action do="share" with="http://example.com/this/page">
+		<a href="•••">Tweet Button</a>
+		<a href="•••">+1 Button</a>
+		<a href="•••">Like Button</a>
+	</action>
+</footer>
+```
 
 Non-supporting agents will show the buttons, supporting agents will replace them with a UI tailored to the user.
 
