@@ -36,7 +36,7 @@ var WebActionHero = (function() {
     var replacements = [
         {
             verb: 'twitter-reply', // reply UI on twitter.com
-            replace: function ($) {
+            replace: function($) {
                 $("a.js-action-reply").each(function(i, e) {
                     var el = $(e);
                     var tweet = el.parents('.tweet');
@@ -53,7 +53,7 @@ var WebActionHero = (function() {
         },
         {
             verb: 'twitter-retweet', // retweet UI on twitter.com
-            replace: function ($) {
+            replace: function($) {
                 $("a.js-toggle-rt").each(function(i, e) {
                     var el = $(e);
                     var tweet = el.parents(".tweet");
@@ -70,7 +70,7 @@ var WebActionHero = (function() {
         },
         {
             verb: 'twitter-favourite', // favourite UI on twitter.com
-            replace: function ($) {
+            replace: function($) {
                 $("a.js-toggle-fav").each(function(i, e) {
                     var el = $(e);
                     var tweet = el.parents('.tweet');
@@ -87,19 +87,19 @@ var WebActionHero = (function() {
         },
         {
             verb: 'tw-tweet', // Tweet buttons across the web
-            replace: function ($) {
+            replace: function($) {
                 $('.twitter-share-button, .twitter-mention-button, .twitter-hashtag-button')
                         .each(function(i, e) {
                     var el = $(e);
                     var url = el.attr('data-url');
-                    
+
                     /**
                      * if I find buttons still using iframes (they seem to not be)
                      * then use parseQueryStringFragment to get properties
                      */
-                    
+
                     var webActionEl = $(getWebAction('tw-tweet', url));
-                    
+
                     el.siblings('[abtwitterbadge]').remove();
                     el.replaceWith(webActionEl);
                 });
@@ -107,13 +107,48 @@ var WebActionHero = (function() {
         },
         {
             verb: 'tw-follow', // Twitter follow buttons across the web
+            replace: function($) {
+                $('a.twitter-follow-button').each(function(i, e) {
+                    var el = $(e);
+                    var url = el.attr('href');
+                    var webActionEl = $(getWebAction('tw-follow', url));
+                    el.replaceWith(webActionEl);
+                });
+
+                $('iframe.twitter-follow-button').each(function(i, e) {
+                    var el = $(e);
+                    var properties = parseQueryStringFragment(el.attr('src'));
+                    var url = 'https://twitter.com/' + properties.screen_name;
+
+                    var webActionEl = $(getWebAction('tw-follow', url));
+                    el.replaceWith(webActionEl);
+                });
+            }
+        },
+        {
+            verb: 'fb-like', // Facebook Like buttons across the web
+            replace: function($) {
+                // TODO: Not sure if this is working
+                $('.fb-like').each(function(i, e) {
+                    var el = $(e);
+                    var url = el.attr('href') || document.location.href;
+                    
+                    var webActionEl = $(getWebAction('fb-like', url));
+                    el.replaceWith(webActionEl);
+                });
+            }
+        },
+        {
+            verb: 'g-plus-one', // Google +1 buttons across the web
             replace: function ($) {
-                $('.twitter-follow-button').each(function (i, e) {
-			var el = $(e);
-                        var url = el.attr('href');
-                        var webActionEl = $(getWebAction('tw-follow', url));
-			el.replaceWith(webActionEl);
-		});
+                $('.g-plusone').each(function (i, e) {
+                    var el = $(e);
+                    var url = el.attr('data-href');
+                    
+                    var webActionEl = $(getWebAction('g-plus-one', url));
+                    el.siblings('[abgoogle]').remove();
+                    el.replaceWith(webActionEl);
+                })
             }
         }
     ];
