@@ -36,7 +36,7 @@ var WebActionHero = (function() {
     var replacements = [
         {
             verb: 'twitter-reply', // reply UI on twitter.com
-            replace: function($) {
+            replace: function ($) {
                 $("a.js-action-reply").each(function(i, e) {
                     var el = $(e);
                     var tweet = el.parents('.tweet');
@@ -53,7 +53,7 @@ var WebActionHero = (function() {
         },
         {
             verb: 'twitter-retweet', // retweet UI on twitter.com
-            replace: function($) {
+            replace: function ($) {
                 $("a.js-toggle-rt").each(function(i, e) {
                     var el = $(e);
                     var tweet = el.parents(".tweet");
@@ -70,7 +70,7 @@ var WebActionHero = (function() {
         },
         {
             verb: 'twitter-favourite', // favourite UI on twitter.com
-            replace: function($) {
+            replace: function ($) {
                 $("a.js-toggle-fav").each(function(i, e) {
                     var el = $(e);
                     var tweet = el.parents('.tweet');
@@ -87,7 +87,7 @@ var WebActionHero = (function() {
         },
         {
             verb: 'tw-tweet', // Tweet buttons across the web
-            replace: function($) {
+            replace: function ($) {
                 $('.twitter-share-button, .twitter-mention-button, .twitter-hashtag-button')
                         .each(function(i, e) {
                     var el = $(e);
@@ -103,6 +103,17 @@ var WebActionHero = (function() {
                     el.siblings('[abtwitterbadge]').remove();
                     el.replaceWith(webActionEl);
                 });
+            }
+        },
+        {
+            verb: 'tw-follow', // Twitter follow buttons across the web
+            replace: function ($) {
+                $('.twitter-follow-button').each(function (i, e) {
+			var el = $(e);
+                        var url = el.attr('href');
+                        var webActionEl = $(getWebAction('tw-follow', url));
+			el.replaceWith(webActionEl);
+		});
             }
         }
     ];
