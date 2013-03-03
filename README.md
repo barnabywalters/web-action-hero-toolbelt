@@ -45,7 +45,7 @@ TODO: Write up a more comprehensive guide/do video
 
 ### Wait, what are &lt;action&gt; elements?
 
-An experimental bit of markup for implementing the Web Action pattern in a way back-compatible with existing markup patterns.
+An experimental bit of markup (proposed by Tantek Çelik [here](http://tantek.com/presentations/2012/06/osb12-web-actions/#slide15)) for implementing the Web Action pattern in a way back-compatible with existing markup patterns.
 
 For example, say you’re a blogger and you want people to be able to share your content. You might decide to put some social sharing buttons at the bottom of your articles:
 
