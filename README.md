@@ -89,6 +89,8 @@ Non-supporting agents will show the buttons, supporting agents will replace them
 
 No. Web Actions are a user-centric reframing of dev-centric web intents, the &lt;action&gt; element is a simple, experimental implementation designed so we can start using this pattern straight away. Only through real world usage will we discover the best solution to these problems.
 
+Other similar technologies also require significant effort on the producer side (writing the UI, invoking via JavaScript) whereas web actions only require a single extra element per action, which can be wrapped around existing markup.
+
 ## Questions without answers (yet)
 
 ### Most people don’t understand URL APIs — why doesn’t this autodiscover services like web intents?
