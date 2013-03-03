@@ -75,7 +75,7 @@ But if I take all of these buttons away in favour of some experimental technolog
 
 ```html
 <footer>
-	<action do="share" with="http://example.com/this/page">
+	<action do="post" with="http://example.com/this/page">
 		<a href="•••">Tweet Button</a>
 		<a href="•••">+1 Button</a>
 		<a href="•••">Like Button</a>
