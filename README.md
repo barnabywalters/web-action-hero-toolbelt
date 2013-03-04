@@ -5,7 +5,7 @@ A cross-browser extension which does two things:
 1. Replaces social sharing buttons with &lt;action&gt; elements
 1. Activates &lt;action&gt; elements
 
-Watch a [demo video](https://www.youtube.com/watch?v=9OAfvuKCsEk).
+Watch a [demo video](https://www.youtube.com/watch?v=9OAfvuKCsEk) or read the [transcript](http://waterpigs.co.uk/articles/web-action-toolbelt-guide/).
 
 ## Installation
 
@@ -39,7 +39,7 @@ Then, depending on your browser:
 
 Click the button in your toolbar to bring up the config UI. An explanation is within.
 
-TODO: Write up a more comprehensive guide/do video
+For more, watch the [demo video](https://www.youtube.com/watch?v=9OAfvuKCsEk) or read the [guide](http://waterpigs.co.uk/articles/web-action-toolbelt-guide/).
 
 ## Questions with answers
 
