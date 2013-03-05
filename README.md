@@ -34,6 +34,9 @@ Then, depending on your browser:
 	1. Trust it
 	1. Restart it
 	1. Configure it
+* Opera:
+	1. Open /output/webactions_0.9.oex
+	2. It will install and show you where the button is
 
 ## Set Up
 
