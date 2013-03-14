@@ -196,8 +196,9 @@ var WebActionHero = (function() {
         verbs = config.verbs;
         replace();
         activateWebActions();
+        startSelectionHandler();
     }
-
+    
     // Container function which calls functions which do UI/button customisation,
     // replacing them with web action elements
     function replace() {
@@ -260,7 +261,13 @@ var WebActionHero = (function() {
             el.replaceWith(ui);
         });
     }
-
+    
+    function startSelectionHandler() {
+        $('body').on('mouseup', function () {
+            // do flow as per http://waterpigs.co.uk/notes/1119/
+        });
+    }
+    
     // Public
     return {
         init: function() {

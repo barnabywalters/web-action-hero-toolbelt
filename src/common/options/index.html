@@ -165,7 +165,20 @@
         <section id="section-selection">
             <h2>Selection</h2>
             
-            <p>Not yet implemented — this will allow you to take actions on selected parts of content.</p>
+            <p>A superset of web actions, allowing you to take actions not only on a URL but on a particular piece of text or markup.</p>
+            
+            <p>When you select a piece of text, a little UI gets dropped over it, containing the usual web action button. But when configuring the services, you get two extra placeholders:</p>
+            
+            <ul>
+                <li><code>{text}</code>: The text content (no HTML) of your selection</li>
+                <li><code>{html}</code>: The HTML markup (cleaned, so with any hanging tags closed) of your selection</li>
+            </ul>
+            
+            <section class="verb" data-verb="selection">
+                <h3>Selections</h3>
+                
+                <table class="services"></table>
+            </section>
         </section>
 
     </body>
