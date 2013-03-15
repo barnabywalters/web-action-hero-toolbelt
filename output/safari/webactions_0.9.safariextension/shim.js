@@ -10,8 +10,8 @@ var WebActionHero = (function() {
     var $; // Zepto
     var verbs;
     var webActionTemplate = [
-        '<div style="display:inline-block; padding-right: 0.33em; border:#555 solid 1px; border-radius: 0.3em;" class="web-action-hero-toolbelt-button">',
-        '<button>Verb This</button>',
+        '<div style="display:inline-block; background: #eee; padding-right: 0.33em; border:#555 solid 1px; border-radius: 0.3em;" class="web-action-hero-toolbelt-button">',
+        '<button style="height: 2em;">Verb This</button>',
         '<select style="width: 1.5em;">',
         '<option disabled>Select a service:</option>',
         '</select>',
@@ -251,6 +251,7 @@ var WebActionHero = (function() {
             verb.services.forEach(function(service, i) {
                 if (i === verb.default) {
                     button.attr('title', service.name);
+                    button.text(service.name);
                     button.click(getActionDispatcher(service.url, url));
                 } else {
                     var option = $('<option />');
@@ -320,6 +321,7 @@ var WebActionHero = (function() {
             verb.services.forEach(function(service, i) {
                 if (i === verb.default) {
                     button.attr('title', service.name);
+                    button.text(service.name);
                     button.click(getActionDispatcher(service.url, replace));
                 } else {
                     var option = $('<option />');
