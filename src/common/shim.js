@@ -196,7 +196,9 @@ var WebActionHero = (function() {
         verbs = config.verbs;
         replace();
         activateWebActions();
-        startSelectionHandler();
+        
+        if (getVerb('sel-quote') !== null)
+            startSelectionHandler();
     }
     
     // Container function which calls functions which do UI/button customisation,
@@ -212,9 +214,14 @@ var WebActionHero = (function() {
         });
     }
 
-    function getActionDispatcher(delegateURL, withURL) {
-        var dispatch = delegateURL.split('{url}').join(encodeURIComponent(withURL));
-
+    function getActionDispatcher(delegateURL, replace) {
+        if (typeof replace === 'string') {
+            var dispatch = delegateURL.split('{url}').join(encodeURIComponent(withURL));
+        } else if (typeof replace === 'object') {
+            for (var placeholder in replace) {
+                var dispatch = delegateURL.split(placeholder).join(replace[placeholder]);
+            }
+        }
         return function() {
             window.open(dispatch);
         };
@@ -248,7 +255,7 @@ var WebActionHero = (function() {
             });
 
             options.change(function() {
-                dispatch = getActionDispatcher(url, $(this).attr('data-dispatch-url'));
+                dispatch = getActionDispatcher(this.getAttribute('data-dispatch-url'), url);
                 dispatch();
             });
 
@@ -264,7 +271,72 @@ var WebActionHero = (function() {
     
     function startSelectionHandler() {
         $('body').on('mouseup', function () {
-            // do flow as per http://waterpigs.co.uk/notes/1119/
+            $('#web-actions-selection').remove();
+            
+            var s = window.getSelection();
+            
+            if (s.isCollapsed)
+                return;
+            
+            var r = s.getRangeAt(0);
+            var e = document.createElement('span');
+            r.surroundContents(e);
+            
+            var selText = e.textContent;
+            var selHTML = e.innerHTML;
+            
+            // TODO: Better way of determining URL using this as a fallback.
+            // Possibles:
+            // * Find closest child web action and use it’s @with
+            // * Find closest ancestor containing a[class|=u-url] and use href
+            var url = document.location.href;
+            
+            var replace = {
+                url: url,
+                text: selText,
+                html: selHTML
+            };
+            
+            var verb = getVerb('sel-quote');
+            
+            // TODO: Make a function which generates this UI for all cases
+            var ui = $(webActionTemplate);
+            var button = ui.find('button');
+            var options = ui.find('select');
+            
+            button.text(verb.name);
+
+            verb.services.forEach(function(service, i) {
+                if (i === verb.default) {
+                    button.attr('title', service.name);
+                    button.click(getActionDispatcher(service.url, replace));
+                } else {
+                    var option = $('<option />');
+                    option.text(service.name);
+                    option.attr('data-dispatch-url', service.url);
+
+                    options.append(option);
+                }
+            });
+
+            options.change(function() {
+                dispatch = getActionDispatcher(this.getAttribute('data-dispatch-url'), replace);
+                dispatch();
+            });
+            
+            // ui is the web action, now create a positioned container for it
+            // with events to destroy it when it is unfocused
+            
+            var coords = $(e).offset();
+            var h = $(e).height(), w = $(e).width();
+            
+            var c = document.createElement('div');
+            c.setAttribute('id', 'web-actions-selection');
+            c.style.position = 'absolute';
+            c.style.top = (coords.top + h / 2) + 'px';
+            c.style.left = (coords.left + w / 2) + 'px';
+            
+            c.appendChild(ui[0]);
         });
     }
     
