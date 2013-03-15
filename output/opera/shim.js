@@ -281,16 +281,14 @@ var WebActionHero = (function() {
             if (s.isCollapsed)
                 return;
             
+            console.log('Starting isCollapsed log');
+            
             var r = s.getRangeAt(0);
             
             var selText = r.toString();
             var htmlCont = document.createElement('div');
             htmlCont.appendChild(r.cloneContents());
             var selHTML = htmlCont.innerHTML;
-            
-            var e = document.createElement('span');
-            e.appendChild(r.extractContents());
-            r.insertNode(e);
             
             // TODO: Better way of determining URL using this as a fallback.
             // Possibles:
@@ -336,14 +334,17 @@ var WebActionHero = (function() {
             // ui is the web action, now create a positioned container for it
             // with events to destroy it when it is unfocused
             
-            var coords = $(e).offset();
-            var h = $(e).height(), w = $(e).width();
+            var startEl = r.startContainer.nodeType === Node.TEXT_NODE
+                ? r.startContainer.parentNode
+                : r.startContainer;
+            
+            var coords = $(startEl).offset();
             
             var c = document.createElement('div');
             c.setAttribute('id', 'web-actions-selection');
             c.style.position = 'absolute';
-            c.style.top = (coords.top + h / 2) + 'px';
-            c.style.left = (coords.left + w / 2) + 'px';
+            c.style.top = (coords.top) + 'px';
+            c.style.left = (coords.left) + 'px';
             
             c.appendChild(ui[0]);
             
