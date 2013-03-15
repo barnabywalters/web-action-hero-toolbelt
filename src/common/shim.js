@@ -218,8 +218,9 @@ var WebActionHero = (function() {
         if (typeof replace === 'string') {
             var dispatch = delegateURL.split('{url}').join(encodeURIComponent(withURL));
         } else if (typeof replace === 'object') {
+            var dispatch = delegateURL;
             for (var placeholder in replace) {
-                var dispatch = delegateURL.split(placeholder).join(encodeURIComponent(replace[placeholder]));
+                dispatch = dispatch.split(placeholder).join(encodeURIComponent(replace[placeholder]));
             }
         }
         return function() {
@@ -271,20 +272,23 @@ var WebActionHero = (function() {
     
     function startSelectionHandler() {
         $('body').on('mouseup', function () {
+            $('#web-actions-selection').remove();
+            
             var s = window.getSelection();
             
             if (s.isCollapsed)
                 return;
             
             var r = s.getRangeAt(0);
+            
+            var selText = r.toString();
+            var htmlCont = document.createElement('div');
+            htmlCont.appendChild(r.cloneContents());
+            var selHTML = htmlCont.innerHTML;
+            
             var e = document.createElement('span');
             e.appendChild(r.extractContents());
             r.insertNode(e);
-            
-            console.log(e);
-            
-            var selText = e.textContent;
-            var selHTML = e.innerHTML;
             
             // TODO: Better way of determining URL using this as a fallback.
             // Possibles:
@@ -293,10 +297,12 @@ var WebActionHero = (function() {
             var url = document.location.href;
             
             var replace = {
-                url: url,
-                text: selText,
-                html: selHTML
+                "{url}": url,
+                "{text}": selText,
+                "{html}": selHTML
             };
+            
+            console.log(replace);
             
             var verb = getVerb('sel-quote');
             
@@ -338,6 +344,8 @@ var WebActionHero = (function() {
             c.style.left = (coords.left + w / 2) + 'px';
             
             c.appendChild(ui[0]);
+            
+            document.body.appendChild(c);
         });
     }
     
