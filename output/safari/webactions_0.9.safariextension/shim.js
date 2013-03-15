@@ -13,7 +13,7 @@ var WebActionHero = (function() {
         '<div style="display:inline-block; padding-right: 0.33em; border:#555 solid 1px; border-radius: 0.3em;" class="web-action-hero-toolbelt-button">',
         '<button>Verb This</button>',
         '<select style="width: 1.5em;">',
-        '<option selected disabled>Select a service:</option>',
+        '<option disabled>Select a service:</option>',
         '</select>',
         '</div>'
     ].join('');
@@ -224,10 +224,14 @@ var WebActionHero = (function() {
             }
         }
         
-        return function(event) {
+        var f = function(event) {
             console.log('Dispatching web action to ' + dispatch);
             window.open(dispatch);
         };
+        
+        f.url = dispatch;
+        
+        return f;
     }
 
     // Goes through all <action> elements, replaces their fallback content with
@@ -327,8 +331,9 @@ var WebActionHero = (function() {
             });
 
             options.change(function() {
-                dispatch = getActionDispatcher(this.getAttribute('data-dispatch-url'), replace);
-                dispatch();
+                var o = this.item(this.selectedIndex);
+                dispatch = getActionDispatcher(o.getAttribute('data-dispatch-url'), replace);
+                kango.invokeAsync('kango.browser.tabs.create', {url: dispatch.url});
             });
             
             // ui is the web action, now create a positioned container for it
