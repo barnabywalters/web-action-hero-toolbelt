@@ -197,7 +197,7 @@ var WebActionHero = (function() {
         replace();
         activateWebActions();
         
-        if (getVerb('sel-quote') !== null)
+        if (verbDefined('sel-quote') !== false)
             startSelectionHandler();
     }
     
@@ -243,7 +243,10 @@ var WebActionHero = (function() {
             var button = ui.find('button');
             var options = ui.find('select');
             var url = el.attr('with');
-
+            
+            if (!verbDefined(el.attr('do')))
+                return;
+            
             var verb = getVerb(el.attr('do'));
 
             button.text(verb.name);
