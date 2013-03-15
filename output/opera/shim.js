@@ -216,14 +216,16 @@ var WebActionHero = (function() {
 
     function getActionDispatcher(delegateURL, replace) {
         if (typeof replace === 'string') {
-            var dispatch = delegateURL.split('{url}').join(encodeURIComponent(withURL));
+            var dispatch = delegateURL.split('{url}').join(encodeURIComponent(replace));
         } else if (typeof replace === 'object') {
             var dispatch = delegateURL;
             for (var placeholder in replace) {
-                dispatch = dispatch.split(placeholder).join(encodeURIComponent(replace[placeholder]));
+                dispatch = dispatch.split('{' + placeholder + '}').join(encodeURIComponent(replace[placeholder]));
             }
         }
-        return function() {
+        
+        return function(event) {
+            console.log('Dispatching web action to ' + dispatch);
             window.open(dispatch);
         };
     }
@@ -271,7 +273,7 @@ var WebActionHero = (function() {
     }
     
     function startSelectionHandler() {
-        $('body').on('mouseup', function () {
+        $('body').children().on('mouseup', function (event) {
             $('#web-actions-selection').remove();
             
             var s = window.getSelection();
@@ -297,9 +299,9 @@ var WebActionHero = (function() {
             var url = document.location.href;
             
             var replace = {
-                "{url}": url,
-                "{text}": selText,
-                "{html}": selHTML
+                url: url,
+                text: selText,
+                html: selHTML
             };
             
             console.log(replace);
