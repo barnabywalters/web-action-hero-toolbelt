@@ -1,9 +1,10 @@
 # Web Action Hero Toolbelt
 
-A cross-browser extension which does two things:
+A cross-browser extension which does three things:
 
 1. Replaces social sharing buttons with &lt;action&gt; elements
-1. Activates &lt;action&gt; elements
+2. Activates &lt;action&gt; elements
+3. Allows you to take actions on selections you’ve made ([demo video](http://www.youtube.com/watch?v=vvcaqSwMVBE))
 
 Watch a [demo video](https://www.youtube.com/watch?v=9OAfvuKCsEk) or read the [transcript](http://waterpigs.co.uk/articles/web-action-toolbelt-guide/).
 
