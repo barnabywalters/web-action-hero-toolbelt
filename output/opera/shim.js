@@ -10,8 +10,8 @@ var WebActionHero = (function() {
     var $; // Zepto
     var verbs;
     var webActionTemplate = [
-        '<div style="display:inline-block; background: #eee; padding-right: 0.33em; border:#555 solid 1px; border-radius: 0.3em;" class="web-action-hero-toolbelt-button">',
-        '<button style="height: 2em;">Verb This</button>',
+        '<div style="z-index: 9999999999; display:inline-block; background: #eee; padding-right: 0.33em; border:#555 solid 1px; border-radius: 0.3em;" class="web-action-hero-toolbelt-button">',
+        '<button style="min-height: 2em;">Verb This</button> ',
         '<select style="width: 1.5em;">',
         '<option disabled>Select a service:</option>',
         '</select>',
@@ -352,6 +352,7 @@ var WebActionHero = (function() {
             c.style.position = 'absolute';
             c.style.top = (coords.top) + 'px';
             c.style.left = (coords.left) + 'px';
+            c.style.zIndex = 9999999999;
             
             c.appendChild(ui[0]);
             
