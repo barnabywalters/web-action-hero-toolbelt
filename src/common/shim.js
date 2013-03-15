@@ -271,8 +271,6 @@ var WebActionHero = (function() {
     
     function startSelectionHandler() {
         $('body').on('mouseup', function () {
-            $('#web-actions-selection').remove();
-            
             var s = window.getSelection();
             
             if (s.isCollapsed)
@@ -280,7 +278,10 @@ var WebActionHero = (function() {
             
             var r = s.getRangeAt(0);
             var e = document.createElement('span');
-            r.surroundContents(e);
+            e.appendChild(r.extractContents());
+            r.insertNode(e);
+            
+            console.log(e);
             
             var selText = e.textContent;
             var selHTML = e.innerHTML;
