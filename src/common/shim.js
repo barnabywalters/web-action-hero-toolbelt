@@ -219,7 +219,7 @@ var WebActionHero = (function() {
             var dispatch = delegateURL.split('{url}').join(encodeURIComponent(withURL));
         } else if (typeof replace === 'object') {
             for (var placeholder in replace) {
-                var dispatch = delegateURL.split(placeholder).join(replace[placeholder]);
+                var dispatch = delegateURL.split(placeholder).join(encodeURIComponent(replace[placeholder]));
             }
         }
         return function() {
