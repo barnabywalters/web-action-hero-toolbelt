@@ -8,6 +8,8 @@ A cross-browser extension which does three things:
 
 Watch a [demo video](https://www.youtube.com/watch?v=9OAfvuKCsEk) or read the [transcript](http://waterpigs.co.uk/articles/web-action-toolbelt-guide/).
 
+![](https://raw.github.com/barnabywalters/web-action-hero-toolbelt/master/web-actions-flow.jpg)
+
 ## Installation
 
 The Toolbelt is cross-browser (courtesy of [Kango](http://kangoextensions.com)) and can be installed on Safari, Firefox, Chrome or Opera.
