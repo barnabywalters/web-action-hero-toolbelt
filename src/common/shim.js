@@ -10,9 +10,9 @@ var WebActionHero = (function() {
     var $; // Zepto
     var verbs;
     var webActionTemplate = [
-        '<div style="z-index: 9999999999; display:inline-block; background: #eee; padding-right: 0.33em; border:#555 solid 1px; border-radius: 0.3em; box-shadow: #aaa 0 0 6px;" class="web-action-hero-toolbelt-button">',
-        '<button style="min-height: 2em;">Verb This</button> ',
-        '<select style="width: 1.5em;">',
+        '<div class="toolbelt-web-action" style="z-index: 9999999999; display:inline-block; background: #eee; padding-right: 0.33em; border:#555 solid 1px; border-radius: 0.3em; box-shadow: #aaa 0 0 6px;" class="web-action-hero-toolbelt-button">',
+        '<button class="toolbelt-web-action-button" style="min-height: 2em;">Verb This</button> ',
+        '<select class="toolbelt-web-action-select" style="width: 1.5em;">',
         '<option disabled>Select a service:</option>',
         '</select>',
         '</div>'
