@@ -18,7 +18,7 @@ var WebActionHero = (function() {
 		'</div>'
 	].join('');
 	var inlineWebActionTemplate = [
-		'<div style="z-index: 9999999999; display:block; background: #eee; border:#555 solid 1px; border-radius: 0.3em; width: 100%; height: 2em;" class="web-action-hero-toolbelt-inline toolbelt-inline-web-action"><div class="toolbelt-iframe-placeholder">',
+		'<div style="z-index: 9999999999; display:block; background: #eee; border:#555 solid 1px; border-radius: 0.3em; width: 100%; min-height: 2em;" class="web-action-hero-toolbelt-inline toolbelt-inline-web-action"><div class="toolbelt-iframe-placeholder">',
 			'<button class="toolbelt-inline-web-action-button" style="width: 90%;">Verb This</button> ',
 			'<select class="toolbelt-inline-web-action-select" style="width: 10%">',
 				'<option disabled>Select a service:</option>',
