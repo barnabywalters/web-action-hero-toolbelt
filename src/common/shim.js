@@ -289,13 +289,24 @@ var WebActionHero = (function() {
 		ifr.seamless = true;
 		ifr.scrolling = 'no';
 		ifr.src = url;
+		ifr.style.width = '100%';
 		
-		$(el).children('.toolbelt-iframe-placeholder').replace(ifr);
+		window.addEventListener('message', function (event) {
+			// TODO: check origin, etc matches url
+			console.log(event.source);
+			
+			if (event.source == ifr) {
+				console.log('The message was from our iframe');
+			}
+		}, false);
+		
+		var replace = el[0].querySelector('.toolbelt-iframe-placeholder');
+		replace.parentElement.replaceChild(ifr, replace);
 	}
 	
 	function activateInlineWebAction(e) {
 		var el = $(e);
-		var ui = $(webActionTemplate);
+		var ui = $(inlineWebActionTemplate);
 		var button = ui.find('button');
 		var options = ui.find('select');
 		var url = el.attr('with');
@@ -312,7 +323,7 @@ var WebActionHero = (function() {
 				button.attr('title', service.name);
 				button.text(service.name);
 				button.click(function () {
-					replaceContainerWithIframe(el, url);
+					replaceContainerWithIframe(ui, service.url);
 				});
 			} else {
 				var option = $('<option />');
@@ -324,7 +335,7 @@ var WebActionHero = (function() {
 		});
 
 		options.change(function() {
-			replaceContainerWithIframe(el, url);
+			replaceContainerWithIframe(ui, this.getAttribute('data-dispatch-url'));
 		});
 		
 		if (options.children().length === 1) {
@@ -339,10 +350,13 @@ var WebActionHero = (function() {
 	// a verb UI
 	function activateWebActions() {
 		$('action').each(function(i, e) {
-			if (e.hasAttribute('inline'))
+			if (e.hasAttribute('inline')) {
+				console.log('Activating inline action on', e);
 				activateInlineWebAction(e);
-			else
-				activateButtonWebAction();
+			} else {
+				console.log('Activating button action on', e);
+				activateButtonWebAction(e);
+			}
 		});
 	}
 	
