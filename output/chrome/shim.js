@@ -293,11 +293,9 @@ var WebActionHero = (function() {
 		
 		window.addEventListener('message', function (event) {
 			// TODO: check origin, etc matches url
-			console.log(event.source);
+			console.log('Received a message', event);
 			
-			if (event.source == ifr) {
-				console.log('The message was from our iframe');
-			}
+			ifr.style.height = event.data.height + 'px';
 		}, false);
 		
 		var replace = el[0].querySelector('.toolbelt-iframe-placeholder');
