@@ -293,7 +293,9 @@ var WebActionHero = (function() {
 		
 		window.addEventListener('message', function (event) {
 			// TODO: check origin, etc matches url
-			console.log('Received a message', event);
+			
+			if (event.source !== ifr.contentWindow)
+				return;
 			
 			ifr.style.height = event.data.height + 'px';
 		}, false);
