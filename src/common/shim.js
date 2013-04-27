@@ -10,12 +10,20 @@ var WebActionHero = (function() {
 	var $; // Zepto
 	var verbs;
 	var webActionTemplate = [
-		'<div class="toolbelt-web-action" style="z-index: 9999999999; display:inline-block; background: #eee; padding-right: 0.33em; border:#555 solid 1px; border-radius: 0.3em; box-shadow: #aaa 0 0 6px;" class="web-action-hero-toolbelt-button">',
-		'<button class="toolbelt-web-action-button" style="min-height: 2em;">Verb This</button> ',
-		'<select class="toolbelt-web-action-select" style="width: 1.5em;">',
-		'<option disabled>Select a service:</option>',
-		'</select>',
+		'<div style="z-index: 9999999999; display:inline-block; background: #eee; padding-right: 0.33em; border:#555 solid 1px; border-radius: 0.3em; box-shadow: #aaa 0 0 6px;" class="web-action-hero-toolbelt-button toolbelt-web-action">',
+			'<button class="toolbelt-web-action-button" style="min-height: 2em;">Verb This</button> ',
+			'<select class="toolbelt-web-action-select" style="width: 1.5em;">',
+				'<option disabled>Select a service:</option>',
+			'</select>',
 		'</div>'
+	].join('');
+	var inlineWebActionTemplate = [
+		'<div style="z-index: 9999999999; display:block; background: #eee; border:#555 solid 1px; border-radius: 0.3em; width: 100%; height: 2em;" class="web-action-hero-toolbelt-inline toolbelt-inline-web-action"><div class="toolbelt-iframe-placeholder">',
+			'<button class="toolbelt-inline-web-action-button" style="width: 90%;">Verb This</button> ',
+			'<select class="toolbelt-inline-web-action-select" style="width: 10%">',
+				'<option disabled>Select a service:</option>',
+			'</select>',
+		'</div></div>'
 	].join('');
 
 	function parseQueryString(url) {
@@ -233,50 +241,108 @@ var WebActionHero = (function() {
 		
 		return f;
 	}
+	
+	function activateButtonWebAction(e) {
+		var el = $(e);
+		var ui = $(webActionTemplate);
+		var button = ui.find('button');
+		var options = ui.find('select');
+		var url = el.attr('with');
+		
+		if (!verbDefined(el.attr('do')))
+			return;
+		
+		var verb = getVerb(el.attr('do'));
+		
+		button.text(verb.name);
+		
+		verb.services.forEach(function(service, i) {
+			if (i === verb.default) {
+				button.attr('title', service.name);
+				button.text(service.name);
+				button.click(getActionDispatcher(service.url, url));
+			} else {
+				var option = $('<option />');
+				option.text(service.name);
+				option.attr('data-dispatch-url', service.url);
 
+				options.append(option);
+			}
+		});
+
+		options.change(function() {
+			dispatch = getActionDispatcher(this.getAttribute('data-dispatch-url'), url);
+			dispatch();
+		});
+
+		kango.console.log('There are ' + options.children().length + ' options');
+		if (options.children().length === 1) {
+			options.remove();
+		}
+
+		// Replace contents of <action> with ui
+		el.replaceWith(ui);
+	}
+	
+	function replaceContainerWithIframe(el, url) {
+		var ifr = document.createElement('iframe');
+		ifr.seamless = true;
+		ifr.scrolling = 'no';
+		ifr.src = url;
+		
+		$(el).children('.toolbelt-iframe-placeholder').replace(ifr);
+	}
+	
+	function activateInlineWebAction(e) {
+		var el = $(e);
+		var ui = $(webActionTemplate);
+		var button = ui.find('button');
+		var options = ui.find('select');
+		var url = el.attr('with');
+		
+		if (!verbDefined(el.attr('do')))
+			return;
+		
+		var verb = getVerb(el.attr('do'));
+		
+		button.text(verb.name);
+		
+		verb.services.forEach(function(service, i) {
+			if (i === verb.default) {
+				button.attr('title', service.name);
+				button.text(service.name);
+				button.click(function () {
+					replaceContainerWithIframe(el, url);
+				});
+			} else {
+				var option = $('<option />');
+				option.text(service.name);
+				option.attr('data-dispatch-url', service.url);
+
+				options.append(option);
+			}
+		});
+
+		options.change(function() {
+			replaceContainerWithIframe(el, url);
+		});
+		
+		if (options.children().length === 1) {
+			options.remove();
+		}
+
+		// Replace contents of <action> with ui
+		el.replaceWith(ui);
+	}
+	
 	// Goes through all <action> elements, replaces their fallback content with
 	// a verb UI
 	function activateWebActions() {
 		$('action').each(function(i, e) {
-			var el = $(e);
-			var ui = $(webActionTemplate);
-			var button = ui.find('button');
-			var options = ui.find('select');
-			var url = el.attr('with');
-			
-			if (!verbDefined(el.attr('do')))
-				return;
-			
-			var verb = getVerb(el.attr('do'));
-
-			button.text(verb.name);
-
-			verb.services.forEach(function(service, i) {
-				if (i === verb.default) {
-					button.attr('title', service.name);
-					button.text(service.name);
-					button.click(getActionDispatcher(service.url, url));
-				} else {
-					var option = $('<option />');
-					option.text(service.name);
-					option.attr('data-dispatch-url', service.url);
-
-					options.append(option);
-				}
-			});
-
-			options.change(function() {
-				dispatch = getActionDispatcher(this.getAttribute('data-dispatch-url'), url);
-				dispatch();
-			});
-
-			kango.console.log('There are ' + options.children().length + ' options');
-			if (options.children().length === 1) {
-				options.remove();
-			}
-
-			// Replace contents of <action> with ui
-			el.replaceWith(ui);
+			if (e.hasAttribute('inline'))
+				activateInlineWebAction(e);
+			else
+				activateButtonWebAction();
 		});
 	}
 	
