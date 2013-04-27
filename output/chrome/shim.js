@@ -290,6 +290,7 @@ var WebActionHero = (function() {
 		ifr.scrolling = 'no';
 		ifr.src = url;
 		ifr.style.width = '100%';
+		ifr.style.border = 'none';
 		
 		window.addEventListener('message', function (event) {
 			// TODO: check origin, etc matches url
