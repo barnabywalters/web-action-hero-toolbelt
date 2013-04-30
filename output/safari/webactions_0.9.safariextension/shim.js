@@ -311,6 +311,7 @@ var WebActionHero = (function() {
 		var button = ui.find('button');
 		var options = ui.find('select');
 		var url = el.attr('with');
+		var replace = el.attr('with') || document.location.href;
 		
 		if (!verbDefined(el.attr('do')))
 			return;
@@ -320,16 +321,18 @@ var WebActionHero = (function() {
 		button.text(verb.name);
 		
 		verb.services.forEach(function(service, i) {
+			var dispatchUrl = service.url.split('{url}').join(encodeURIComponent(replace));
+			
 			if (i === verb.default) {
 				button.attr('title', service.name);
 				button.text(service.name);
 				button.click(function () {
-					replaceContainerWithIframe(ui, service.url);
+					replaceContainerWithIframe(ui, dispatchUrl);
 				});
 			} else {
 				var option = $('<option />');
 				option.text(service.name);
-				option.attr('data-dispatch-url', service.url);
+				option.attr('data-dispatch-url', dispatchUrl);
 
 				options.append(option);
 			}
