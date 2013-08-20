@@ -62,7 +62,7 @@ var WebActionHero = (function() {
 		{
 			verb: 'twitter-retweet', // retweet UI on twitter.com
 			replace: function($) {
-				$("a.js-toggle-rt").each(function(i, e) {
+				$(".js-toggle-rt").each(function(i, e) {
 					var el = $(e);
 					var tweet = el.parents(".tweet");
 					var url = "https://twitter.com/"
@@ -79,7 +79,7 @@ var WebActionHero = (function() {
 		{
 			verb: 'twitter-favourite', // favourite UI on twitter.com
 			replace: function($) {
-				$("a.js-toggle-fav").each(function(i, e) {
+				$(".js-toggle-fav").each(function(i, e) {
 					var el = $(e);
 					var tweet = el.parents('.tweet');
 					var url = "https://twitter.com/"
