@@ -10,19 +10,13 @@ var WebActionHero = (function() {
 	var $; // Zepto
 	var verbs;
 	var webActionTemplate = [
-		'<div style="z-index: 9999999999; display:inline-block; background: #eee; padding-right: 0.33em; border:#555 solid 1px; border-radius: 0.3em; box-shadow: #aaa 0 0 6px;" class="web-action-hero-toolbelt-button toolbelt-web-action">',
-			'<button class="toolbelt-web-action-button" style="min-height: 2em;">Verb This</button> ',
-			'<select class="toolbelt-web-action-select" style="width: 1.5em;">',
-				'<option disabled>Select a service:</option>',
-			'</select>',
+		'<div style="z-index: 9999999999;" class="web-action-hero-toolbelt-button toolbelt-web-action">',
+			'<button class="toolbelt-web-action-button" style="font-family: \'Lucida Grande\', helvetica, verdana, sans-serif;">Verb This</button>',
 		'</div>'
 	].join('');
 	var inlineWebActionTemplate = [
-		'<div style="z-index: 9999999999; display:block; background: #eee; border:#555 solid 1px; border-radius: 0.3em; width: 100%; min-height: 2em;" class="web-action-hero-toolbelt-inline toolbelt-inline-web-action"><div class="toolbelt-iframe-placeholder">',
-			'<button class="toolbelt-inline-web-action-button" style="width: 90%;">Verb This</button> ',
-			'<select class="toolbelt-inline-web-action-select" style="width: 10%">',
-				'<option disabled>Select a service:</option>',
-			'</select>',
+		'<div style="z-index: 9999999999;" class="web-action-hero-toolbelt-inline toolbelt-inline-web-action"><div class="toolbelt-iframe-placeholder">',
+			'<button class="toolbelt-inline-web-action-button" style="width: 90%;">Verb This</button>',
 		'</div></div>'
 	].join('');
 
@@ -198,9 +192,6 @@ var WebActionHero = (function() {
 	}
 
 	function main(config) {
-		kango.console.log('main() called with config:');
-		kango.console.log(config);
-
 		verbs = config.verbs;
 		replace();
 		activateWebActions();
@@ -217,7 +208,6 @@ var WebActionHero = (function() {
 		});
 
 		toReplace.forEach(function(replacement) {
-			kango.console.log('Replacing for verb ' + replacement.verb);
 			replacement.replace($);
 		});
 	}
@@ -261,18 +251,7 @@ var WebActionHero = (function() {
 				button.attr('title', service.name);
 				button.text(service.name);
 				button.click(getActionDispatcher(service.url, url));
-			} else {
-				var option = $('<option />');
-				option.text(service.name);
-				option.attr('data-dispatch-url', service.url);
-
-				options.append(option);
 			}
-		});
-
-		options.change(function() {
-			dispatch = getActionDispatcher(this.getAttribute('data-dispatch-url'), url);
-			dispatch();
 		});
 
 		kango.console.log('There are ' + options.children().length + ' options');
@@ -355,10 +334,8 @@ var WebActionHero = (function() {
 	function activateWebActions() {
 		$('action').each(function(i, e) {
 			if (e.hasAttribute('inline')) {
-				console.log('Activating inline action on', e);
 				activateInlineWebAction(e);
 			} else {
-				console.log('Activating button action on', e);
 				activateButtonWebAction(e);
 			}
 		});
@@ -372,8 +349,6 @@ var WebActionHero = (function() {
 			
 			if (s.isCollapsed)
 				return;
-			
-			console.log('Starting isCollapsed log');
 			
 			var r = s.getRangeAt(0);
 			
