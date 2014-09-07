@@ -14,7 +14,7 @@ Watch a [demo video](https://www.youtube.com/watch?v=9OAfvuKCsEk) or read the [t
 
 The Toolbelt is cross-browser (courtesy of [Kango](http://kangoextensions.com)) and can be installed on Safari, Firefox, Chrome or Opera.
 
-1. Clone the repo (downloads offered soon)
+1. Clone the repo or download the ZIP
 1. Navigate to /output
 
 Then, depending on your browser:
