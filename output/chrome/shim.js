@@ -188,7 +188,7 @@ var WebActionHero = (function() {
 
 	// Returns web action markup for a given verb and link
 	function getWebAction(verb, link) {
-		return '<action do="' + verb + '" with="' + link + '">THIS WAS REPLACED</action>';
+		return '<indie-action do="' + verb + '" with="' + link + '">THIS WAS REPLACED</indie-action>';
 	}
 
 	function main(config) {
@@ -332,7 +332,7 @@ var WebActionHero = (function() {
 	// Goes through all <action> elements, replaces their fallback content with
 	// a verb UI
 	function activateWebActions() {
-		$('action').each(function(i, e) {
+		$('action, indie-action').each(function(i, e) {
 			if (e.hasAttribute('inline')) {
 				activateInlineWebAction(e);
 			} else {
