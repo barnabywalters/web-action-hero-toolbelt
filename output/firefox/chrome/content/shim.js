@@ -10,12 +10,12 @@ var WebActionHero = (function() {
 	var $; // Zepto
 	var verbs;
 	var webActionTemplate = [
-		'<div style="z-index: 9999999999;" class="web-action-hero-toolbelt-button toolbelt-web-action">',
+		'<div style="z-index: 9999999999; display: inline-block !important;" class="web-action-hero-toolbelt-button toolbelt-web-action">',
 			'<button class="toolbelt-web-action-button" style="font-family: \'Lucida Grande\', helvetica, verdana, sans-serif;">Verb This</button>',
 		'</div>'
 	].join('');
 	var inlineWebActionTemplate = [
-		'<div style="z-index: 9999999999;" class="web-action-hero-toolbelt-inline toolbelt-inline-web-action"><div class="toolbelt-iframe-placeholder">',
+		'<div style="z-index: 9999999999; display: inline-block !important;" class="web-action-hero-toolbelt-inline toolbelt-inline-web-action"><div class="toolbelt-iframe-placeholder">',
 			'<button class="toolbelt-inline-web-action-button" style="width: 90%;">Verb This</button>',
 		'</div></div>'
 	].join('');
