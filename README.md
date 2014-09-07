@@ -2,8 +2,8 @@
 
 A cross-browser extension which does three things:
 
-1. Replaces social sharing buttons with &lt;action&gt; elements
-2. Activates &lt;action&gt; elements
+1. Replaces social sharing buttons with &lt;indie-action&gt; elements
+2. Activates &lt;indie-action&gt; elements
 3. Allows you to take actions on selections you’ve made ([demo video](http://www.youtube.com/watch?v=vvcaqSwMVBE))
 
 Watch a [demo video](https://www.youtube.com/watch?v=9OAfvuKCsEk) or read the [transcript](http://waterpigs.co.uk/articles/web-action-toolbelt-guide/).
@@ -22,7 +22,7 @@ Then, depending on your browser:
 * Chrome:
 	1. Navigate to chrome://extensions
 	1. If not already enabled, enable Dev Mode (top right)
-	1. Load Unpacked Extension, and select /output/chrome
+	1. Press the Load Unpacked Extension button, and select /output/chrome
 	1. Web Actions should pop up in the list, Click 'Options' to configure it.
 * Safari:
 	1. Develop -> Show Extension Builder
@@ -49,7 +49,7 @@ For more, watch the [demo video](https://www.youtube.com/watch?v=9OAfvuKCsEk) or
 
 ## Questions with answers
 
-### Wait, what are &lt;action&gt; elements?
+### Wait, what are &lt;indie-action&gt; elements?
 
 An experimental bit of markup (proposed by Tantek Çelik [here](http://tantek.com/presentations/2012/06/osb12-web-actions/#slide15)) for implementing the Web Action pattern in a way back-compatible with existing markup patterns.
 
@@ -77,15 +77,15 @@ But what if people aren’t using twitter? Surely I should add a load of others 
 </footer>
 ```
 
-But if I take all of these buttons away in favour of some experimental technology no-one uses, there won’t really be any benefit. So, the `action` element is back-compatible with current markup. Just wrap all buttons which represent a particular verb in that `action`:
+But if I take all of these buttons away in favour of some experimental technology no-one uses, there won’t really be any benefit. So, the `action` element is back-compatible with current markup. Just wrap all buttons which represent a particular verb in that `indie-action`:
 
 ```html
 <footer>
-	<action do="post" with="http://example.com/this/page">
+	<indie-action do="post" with="http://example.com/this/page">
 		<a href="•••">Tweet Button</a>
 		<a href="•••">+1 Button</a>
 		<a href="•••">Like Button</a>
-	</action>
+	</indie-action>
 </footer>
 ```
 
@@ -93,9 +93,13 @@ Non-supporting agents will show the buttons, supporting agents will replace them
 
 ### Isn’t this just [web intents | web activities | x other technology]?
 
-No. Web Actions are a user-centric reframing of dev-centric web intents, the &lt;action&gt; element is a simple, experimental implementation designed so we can start using this pattern straight away. Only through real world usage will we discover the best solution to these problems.
+No. Web Actions are a user-centric reframing of dev-centric web intents, the &lt;indie-action&gt; element is a simple, experimental implementation designed so we can start using this pattern straight away. Only through real world usage will we discover the best solution to these problems.
 
 Other similar technologies also require significant effort on the producer side (writing the UI, invoking via JavaScript) whereas web actions only require a single extra element per action, which can be wrapped around existing markup.
+
+### Wasn’t the element originally `<action>`?
+
+Yep, but at IWCUK 2014 <a class="h-card" href="http://adactio.com">Jeremy Keith</a> pointed out that it should be altered to fit better with the web components spec.
 
 ## Questions without answers (yet)
 
